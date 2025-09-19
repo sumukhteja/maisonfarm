@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Goddess Smoothie - Maison Vitalité</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: #FAF8F5;
+            color: #2D2D2D;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #D4D4D4;
+            padding-bottom: 40px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: #3C2E1F;
+        }
+
+        .breadcrumb {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #B8860B;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #4A3728;
+        }
+
+        nav {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            text-decoration: none;
+            color: #4A3728;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #B8860B;
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .recipe-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .recipe-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .recipe-subtitle {
+            font-size: 20px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .recipe-meta {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #B8860B;
+            display: block;
+        }
+
+        .meta-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .recipe-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .ingredients-section,
+        .instructions-section,
+        .benefits-section {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 45px;
+            border-radius: 8px;
+            border: 1px solid #E8E8E8;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 1px;
+            background-color: #B8860B;
+            margin: 15px auto 0;
+        }
+
+        .ingredients-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ingredients-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 17px;
+        }
+
+        .ingredients-list li::before {
+            content: '•';
+            color: #B8860B;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 17px;
+        }
+
+        .benefits-list li::before {
+            content: '•';
+            color: #B8860B;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .instructions-list {
+            list-style: none;
+            counter-reset: step-counter;
+            padding: 0;
+        }
+
+        .instructions-list li {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding-left: 45px;
+            position: relative;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .instructions-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 2px;
+            background: #B8860B;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nutrition-benefits {
+            background: rgba(184, 134, 11, 0.05);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(184, 134, 11, 0.2);
+            margin-bottom: 60px;
+        }
+
+        .benefits-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #4A3728;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-item {
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .benefit-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #4A3728;
+        }
+
+        .benefit-description {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .tips-section {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #E8E8E8;
+            margin-bottom: 60px;
+        }
+
+        .tips-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #4A3728;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 16px;
+        }
+
+        .tips-list li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #E8E8E8;
+        }
+
+        .content-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #4A3728;
+        }
+
+        .ingredient-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .ingredient-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .ingredient-list li::before {
+            content: '•';
+            color: #B8860B;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+
+        .optimization-tips {
+            list-style: none;
+            counter-reset: tip-counter;
+        }
+
+        .optimization-tips li {
+            counter-increment: tip-counter;
+            margin-bottom: 25px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .optimization-tips li::before {
+            content: counter(tip-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #B8860B;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #4A3728;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: background 0.3s ease;
+            margin-bottom: 40px;
+        }
+
+        .back-button:hover {
+            background: #B8860B;
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #D4D4D4;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #4A3728;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #B8860B;
+        }
+
+        .footer-newsletter {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #E8E8E8;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .footer-newsletter h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #4A3728;
+        }
+
+        .footer-newsletter p {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-input {
+            padding: 12px 20px;
+            border: 1px solid #D4D4D4;
+            border-radius: 4px;
+            background: #FAF8F5;
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+            min-width: 250px;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #B8860B;
+        }
+
+        .newsletter-btn {
+            padding: 12px 30px;
+            background: #4A3728;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #B8860B;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid #E8E8E8;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 30px;
+            
+            .nav-links {
+                flex-direction: row;
+                gap: 20px;
+                justify-content: center;
+            }
+        }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .recipe-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .recipe-meta {
+                gap: 40px;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .ingredients-section,
+            .instructions-section,
+            .nutrition-benefits,
+            .tips-section {
+                padding: 30px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .newsletter-input {
+                min-width: 200px;
+            }
+        }
+        /* Navigation Styles */
+        nav {
+            margin-bottom: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4A3728;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #B8860B;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Maison Vitalité</div>
+            <div class="breadcrumb">
+                <a href="index.html">Recipes</a> / <a href="#">Smoothies</a> / Green Goddess Smoothie
+            </div>
+        </header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html#ingredients" class="nav-link">Ingredients</a></li>
+                <li><a href="index.html#recipes" class="nav-link">Recipes</a></li>
+                <li><a href="index.html#tips" class="nav-link">Tips</a></li>
+            </ul>
+        </nav>
+
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html#ingredients" class="nav-link">Ingredients</a></li>
+                <li><a href="index.html#recipes" class="nav-link">Recipes</a></li>
+                <li><a href="index.html#tips" class="nav-link">Tips</a></li>
+            </ul>
+        </nav>
+
+        <div class="recipe-hero">
+            <h1 class="recipe-title">Green Goddess Smoothie</h1>
+            <p class="recipe-subtitle">A nutrient-dense powerhouse blend for sustained energy and mental clarity</p>
+            
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <span class="meta-value">3</span>
+                    <span class="meta-label">Minutes</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">1</span>
+                    <span class="meta-label">Serving</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">Low</span>
+                    <span class="meta-label">Difficulty</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">Keto</span>
+                    <span class="meta-label">Diet Type</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-content">
+            <div class="ingredients-section">
+                <h2 class="section-title">Ingredients</h2>
+                <ul class="ingredients-list">
+                    <li>1 cup fresh organic spinach</li>
+                    <li>½ ripe avocado</li>
+                    <li>1 scoop unflavored collagen peptides</li>
+                    <li>½ cup full-fat coconut cream</li>
+                    <li>1 tablespoon MCT oil</li>
+                    <li>1 tablespoon fresh lemon juice</li>
+                    <li>1 teaspoon fresh ginger, grated</li>
+                    <li>½ cucumber, peeled</li>
+                    <li>1 cup filtered water</li>
+                    <li>5-6 ice cubes</li>
+                    <li>Stevia to taste (optional)</li>
+                </ul>
+            </div>
+
+            <div class="instructions-section">
+                <h2 class="section-title">Instructions</h2>
+                <ol class="instructions-list">
+                    <li>Add filtered water and coconut cream to your high-speed blender first for optimal blending.</li>
+                    <li>Add the fresh spinach and blend for 30 seconds until completely smooth.</li>
+                    <li>Add avocado, cucumber, ginger, and lemon juice. Blend for another 30 seconds.</li>
+                    <li>Add collagen peptides and blend briefly to incorporate without creating foam.</li>
+                    <li>Add MCT oil slowly while blending on low speed to emulsify properly.</li>
+                    <li>Add ice cubes and blend until desired consistency is reached.</li>
+                    <li>Taste and adjust with stevia if needed. Serve immediately in a chilled glass.</li>
+                </ol>
+            </div>
+
+            <div class="benefits-section">
+                <h2 class="section-title">Benefits</h2>
+                <ul class="benefits-list">
+                    <li>MCT oil provides instant ketones for mental clarity and focus</li>
+                    <li>Collagen peptides support muscle recovery and joint health</li>
+                    <li>Spinach and cucumber provide natural detoxification compounds</li>
+                    <li>Healthy fats provide long-lasting energy without crashes</li>
+                    <li>Avocado delivers heart-healthy monounsaturated fats</li>
+                    <li>Ginger aids digestion and reduces inflammation</li>
+                    <li>Lemon juice boosts vitamin C and enhances iron absorption</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2 class="tips-title">Pro Tips</h2>
+            <ul class="tips-list">
+                <li>Use frozen spinach if fresh isn't available - it actually blends smoother</li>
+                <li>Start with less MCT oil if you're new to it to avoid digestive upset</li>
+                <li>Chill your glass in the freezer for 10 minutes before serving</li>
+                <li>Add a pinch of sea salt to enhance the flavors and provide electrolytes</li>
+                <li>For extra creaminess, freeze banana slices and add 2-3 pieces</li>
+                <li>Drink within 15 minutes for maximum nutrient absorption</li>
+            </ul>
+        </div>
+
+        <a href="index.html" class="back-button">← Back to Recipes</a>
+
+        <footer>
+            <!-- Newsletter Signup -->
+            <div class="footer-newsletter">
+                <h4>Stay Optimized</h4>
+                <p>Get weekly bulletproof nutrition tips and exclusive recipes delivered to your inbox</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+
+            <!-- Footer Content -->
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Nutrition</h4>
+                    <ul>
+                        <li><a href="#">Bulletproof Coffee Guide</a></li>
+                        <li><a href="#">Intermittent Fasting</a></li>
+                        <li><a href="#">Keto Fundamentals</a></li>
+                        <li><a href="#">Supplement Stack</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Meal Planning</a></li>
+                        <li><a href="#">Food Quality Guide</a></li>
+                        <li><a href="#">Biohacking Tools</a></li>
+                        <li><a href="#">Scientific Research</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Consultation Booking</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Maison Vitalité. All rights reserved.</p>
+                <p>Premium nutrition guidance for optimal human performance</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.querySelector('.newsletter-input').value;
+            alert(`Thank you for subscribing with email: ${email}`);
+            document.querySelector('.newsletter-input').value = '';
+        });
+    </script>
+</body>
+</html>

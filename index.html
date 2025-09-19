@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Vitalité - Premium Nutrition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: #FAF8F5;
+            color: #2D2D2D;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #D4D4D4;
+            padding-bottom: 40px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: #3C2E1F;
+        }
+
+        .tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-style: italic;
+            font-size: 16px;
+            color: #666;
+        }
+
+        nav {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            text-decoration: none;
+            color: #4A3728;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #B8860B;
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .menu-section {
+            margin-bottom: 60px;
+        }
+
+        .menu-category {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .menu-category::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 1px;
+            background-color: #D4D4D4;
+            margin: 20px auto;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 35px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(184, 134, 11, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .menu-item-info {
+            flex: 1;
+        }
+
+        .menu-item-name {
+            font-family: 'Crimson Text', serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .menu-item-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .menu-item-price {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            margin-left: 30px;
+            flex-shrink: 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #E8E8E8;
+        }
+
+        .content-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #4A3728;
+        }
+
+        .ingredient-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .ingredient-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .ingredient-list li::before {
+            content: '•';
+            color: #B8860B;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+
+        .tips-list {
+            list-style: none;
+            counter-reset: tip-counter;
+        }
+
+        .tips-list li {
+            counter-increment: tip-counter;
+            margin-bottom: 25px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .tips-list li::before {
+            content: counter(tip-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #B8860B;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #D4D4D4;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #4A3728;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #B8860B;
+        }
+
+        .footer-newsletter {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #E8E8E8;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .footer-newsletter h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #4A3728;
+        }
+
+        .footer-newsletter p {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-input {
+            padding: 12px 20px;
+            border: 1px solid #D4D4D4;
+            border-radius: 4px;
+            background: #FAF8F5;
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+            min-width: 250px;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #B8860B;
+        }
+
+        .newsletter-btn {
+            padding: 12px 30px;
+            background: #4A3728;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #B8860B;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid #E8E8E8;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 30px;
+            }
+            
+            .nav-links {
+                flex-direction: row;
+                gap: 20px;
+                justify-content: center;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .menu-item-price {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .newsletter-input {
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Maison Vitalité</div>
+            <div class="tagline">Premium Nutrition • Optimal Health</div>
+            <div class="subtitle">Curated nutrition • Scientific approach</div>
+        </header>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('ingredients')" class="nav-link">Ingredients</a></li>
+                <li><a href="#" onclick="showPage('recipes')" class="nav-link active">Recipes</a></li>
+                <li><a href="#" onclick="showPage('tips')" class="nav-link">Tips</a></li>
+            </ul>
+        </nav>
+
+        <!-- Ingredients Page -->
+        <div id="ingredients" class="page-content">
+            <div class="section-title">Premium Ingredients</div>
+            
+            <!-- Filter buttons -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <button class="filter-btn active" onclick="filterIngredients('all')" style="margin: 5px 10px; padding: 10px 20px; background: #B8860B; color: white; border: none; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">All</button>
+                <button class="filter-btn" onclick="filterIngredients('Vegetables')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Vegetables</button>
+                <button class="filter-btn" onclick="filterIngredients('Pantry')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Pantry</button>
+                <button class="filter-btn" onclick="filterIngredients('Spices')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Spices</button>
+                <button class="filter-btn" onclick="filterIngredients('Protein')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Protein</button>
+                <button class="filter-btn" onclick="filterIngredients('Starches')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Starches</button>
+                <button class="filter-btn" onclick="filterIngredients('Condiments')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Condiments</button>
+                <button class="filter-btn" onclick="filterIngredients('Fats & Oils')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Fats & Oils</button>
+                <button class="filter-btn" onclick="filterIngredients('Beverage')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Beverages</button>
+                <button class="filter-btn" onclick="filterIngredients('Supplement')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Supplements</button>
+                <button class="filter-btn" onclick="filterIngredients('Fruit')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Fruits</button>
+                <button class="filter-btn" onclick="filterIngredients('Herb')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Herbs</button>
+                <button class="filter-btn" onclick="filterIngredients('Nuts')" style="margin: 5px 10px; padding: 10px 20px; background: transparent; color: #4A3728; border: 1px solid #4A3728; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">Nuts</button>
+            </div>
+            
+            <div style="max-width: 600px; margin: 0 auto;">
+                <ul id="ingredients-list" style="list-style: none; padding: 0; font-size: 24px; line-height: 1.8;">
+                    <!-- Vegetables -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Vegetables</li>
+                    <li data-category="Vegetables"><a href="avocado.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Avocado</a></li>
+                    <li data-category="Vegetables"><a href="zucchini-green.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Zucchini (Green)</a></li>
+                    <li data-category="Vegetables"><a href="zucchini-yellow.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Zucchini (Yellow)</a></li>
+                    <li data-category="Vegetables"><a href="spinach.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Spinach</a></li>
+                    <li data-category="Vegetables"><a href="bottle-gourd.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Bottle Gourd</a></li>
+                    <li data-category="Vegetables"><a href="cauliflower.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Cauliflower</a></li>
+                    <li data-category="Vegetables"><a href="asparagus.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Asparagus</a></li>
+                    <li data-category="Vegetables"><a href="beans-green.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Beans (Green)</a></li>
+                    <li data-category="Vegetables"><a href="madras-cucumber.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Madras Cucumber</a></li>
+                    <li data-category="Vegetables"><a href="pumpkin.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Pumpkin</a></li>
+                    <li data-category="Vegetables"><a href="radish.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Radish</a></li>
+                    <li data-category="Vegetables"><a href="celery.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Celery</a></li>
+                    <li data-category="Vegetables"><a href="brussels-sprouts.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Brussels Sprouts</a></li>
+                    <li data-category="Vegetables (cruciferous)"><a href="broccoli.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Broccoli</a></li>
+                    
+                    <!-- Pantry -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Pantry</li>
+                    <li data-category="Pantry"><a href="organic-coconut-milk.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Organic Coconut Milk</a></li>
+                    
+                    <!-- Spices -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Spices</li>
+                    <li data-category="Spices"><a href="ginger.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Ginger</a></li>
+                    <li data-category="Spices"><a href="oregano.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Oregano</a></li>
+                    <li data-category="Spices"><a href="turmeric.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Turmeric</a></li>
+                    <li data-category="Spices"><a href="fennel.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Fennel</a></li>
+                    <li data-category="Spices"><a href="cinnamon.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Cinnamon</a></li>
+                    <li data-category="Spices">Jeera (Cumin)</li>
+                    <li data-category="Spices"><a href="cloves.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Cloves</a></li>
+                    
+                    <!-- Protein -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Protein</li>
+                    <li data-category="Protein"><a href="egg.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Egg</a></li>
+                    <li data-category="Protein"><a href="chicken-breast.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Chicken Breast</a></li>
+                    <li data-category="Protein"><a href="mutton-mince.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Mutton Mince</a></li>
+                    <li data-category="Protein"><a href="fish-fatty.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Fish (fatty)</a></li>
+                    <li data-category="Protein"><a href="mutton-curry-cut.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Mutton Curry Cut</a></li>
+                    <li data-category="Protein">Meatigo Marinated Chicken (Clean)</li>
+                    
+                    <!-- Starches -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Starches</li>
+                    <li data-category="Starches"><a href="rice-noodles.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Rice Noodles</a></li>
+                    <li data-category="Starches"><a href="sweet-potato.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Sweet Potato</a></li>
+                    <li data-category="Starches">Rice Flour</li>
+                    <li data-category="Starches"><a href="basmati-rice.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Basmati Rice</a></li>
+                    <li data-category="Starches">Rice Rava</li>
+                    
+                    <!-- Condiments -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Condiments</li>
+                    <li data-category="Condiments"><a href="sea-salt.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Sea Salt</a></li>
+                    <li data-category="Condiments"><a href="pink-salt.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Pink Salt</a></li>
+                    <li data-category="Condiments"><a href="vinegar.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Vinegar</a></li>
+                    
+                    <!-- Fats & Oils -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Fats & Oils</li>
+                    <li data-category="Fats & Oils"><a href="ghee.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Ghee</a></li>
+                    <li data-category="Fats & Oils"><a href="coconut-oil.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Coconut Oil</a></li>
+                    <li data-category="Fats & Oils"><a href="coconut-flakes.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Coconut Flakes</a></li>
+                    <li data-category="Fats & Oils"><a href="cocoa-butter.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Cocoa Butter</a></li>
+                    <li data-category="Fats & Oils"><a href="avocado-oil.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Avocado Oil</a></li>
+                    <li data-category="Fats & Oils"><a href="mct-oil.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">MCT Oil</a></li>
+                    
+                    <!-- Beverages -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Beverages</li>
+                    <li data-category="Beverage"><a href="coffee.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Coffee</a></li>
+                    
+                    <!-- Supplements -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Supplements</li>
+                    <li data-category="Supplement"><a href="electrolytes.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Electrolytes</a></li>
+                    
+                    <!-- Fruits -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Fruits</li>
+                    <li data-category="Fruit"><a href="raspberries.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Raspberries</a></li>
+                    <li data-category="Fruit"><a href="cranberries.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Cranberries</a></li>
+                    <li data-category="Fruit"><a href="blackberries.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Blackberries</a></li>
+                    <li data-category="Fruit"><a href="pineapple.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Pineapple</a></li>
+                    <li data-category="Fruit"><a href="blueberries.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Blueberries</a></li>
+                    
+                    <!-- Herbs -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Herbs</li>
+                    <li data-category="Herb"><a href="cilantro.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Cilantro</a></li>
+                    <li data-category="Vegetables (citrus)"><a href="lime.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Lime</a></li>
+                    
+                    <!-- Nuts -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Nuts</li>
+                    <li data-category="Nuts"><a href="pistachios.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Pistachios</a></li>
+                    <li data-category="Nuts"><a href="macadamia-nuts.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Macadamia Nuts</a></li>
+                    
+                    <!-- Other -->
+                    <li class="category-header" style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #4A3728; margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">Other</li>
+                    <li data-category="Condiment/Fat"><a href="olives.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Olives</a></li>
+                    <li data-category="Sweetener"><a href="stevia.html" style="text-decoration: none; color: inherit; transition: color 0.3s ease;" onmouseover="this.style.color='#B8860B'" onmouseout="this.style.color='inherit'">Stevia</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Recipes Page -->
+        <div id="recipes" class="page-content active">
+            <div class="section-title">Recipes</div>
+            
+            <!-- Smoothies -->
+            <div class="menu-section">
+                <div class="menu-category">Smoothies</div>
+                
+                <div class="menu-item" onclick="window.location.href='green-goddess-smoothie.html'">
+    <div class="menu-item-info">
+        <div class="menu-item-name">Green Goddess Smoothie</div>
+        <div class="menu-item-description">Spinach, avocado, collagen, coconut cream, and MCT oil blend</div>
+    </div>
+    <div class="menu-item-price">3 min</div>
+</div>
+
+                
+                <div class="menu-item" onclick="showRecipe('chocolate-protein-smoothie')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Chocolate Protein Smoothie</div>
+                        <div class="menu-item-description">Raw cacao, grass-fed whey, almond butter, and coconut milk</div>
+                    </div>
+                    <div class="menu-item-price">4 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('berry-antioxidant-smoothie')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Berry Antioxidant Smoothie</div>
+                        <div class="menu-item-description">Mixed organic berries, collagen, coconut cream, and vanilla</div>
+                    </div>
+                    <div class="menu-item-price">3 min</div>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="menu-section">
+                <div class="menu-category">Desserts</div>
+                
+                <div class="menu-item" onclick="showRecipe('keto-chocolate-mousse')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Keto Chocolate Mousse</div>
+                        <div class="menu-item-description">Avocado, cacao, coconut cream, and stevia sweetened</div>
+                    </div>
+                    <div class="menu-item-price">15 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('coconut-fat-bombs')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Coconut Fat Bombs</div>
+                        <div class="menu-item-description">Coconut oil, almond butter, and vanilla protein blend</div>
+                    </div>
+                    <div class="menu-item-price">10 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('chia-pudding')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Vanilla Chia Pudding</div>
+                        <div class="menu-item-description">Chia seeds, coconut milk, collagen, and fresh berries</div>
+                    </div>
+                    <div class="menu-item-price">5 min</div>
+                </div>
+            </div>
+
+            <!-- Curries -->
+            <div class="menu-section">
+                <div class="menu-category">Curries</div>
+                
+                <div class="menu-item" onclick="showRecipe('coconut-chicken-curry')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Coconut Chicken Curry</div>
+                        <div class="menu-item-description">Organic chicken, coconut milk, turmeric, and vegetables</div>
+                    </div>
+                    <div class="menu-item-price">35 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('beef-bone-broth-curry')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Beef Bone Broth Curry</div>
+                        <div class="menu-item-description">Grass-fed beef, bone broth, ginger, and anti-inflammatory spices</div>
+                    </div>
+                    <div class="menu-item-price">45 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('cauliflower-vegetable-curry')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Cauliflower Vegetable Curry</div>
+                        <div class="menu-item-description">Cauliflower, spinach, coconut cream, and healing spices</div>
+                    </div>
+                    <div class="menu-item-price">25 min</div>
+                </div>
+            </div>
+
+            <!-- Quick Meals -->
+            <div class="menu-section">
+                <div class="menu-category">Quick Meals</div>
+                
+                <div class="menu-item" onclick="showRecipe('avocado-egg-bowl')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Avocado Egg Bowl</div>
+                        <div class="menu-item-description">Pastured eggs, avocado, microgreens, and olive oil drizzle</div>
+                    </div>
+                    <div class="menu-item-price">8 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('salmon-salad-wrap')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Salmon Salad Wrap</div>
+                        <div class="menu-item-description">Wild salmon, coconut wrap, avocado mayo, and greens</div>
+                    </div>
+                    <div class="menu-item-price">10 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('bulletproof-meatballs')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Bulletproof Meatballs</div>
+                        <div class="menu-item-description">Grass-fed beef, herbs, coconut flour, and ghee</div>
+                    </div>
+                    <div class="menu-item-price">20 min</div>
+                </div>
+            </div>
+
+            <!-- Soups -->
+            <div class="menu-section">
+                <div class="menu-category">Soups</div>
+                
+                <div class="menu-item" onclick="showRecipe('bone-broth-classic')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Classic Bone Broth</div>
+                        <div class="menu-item-description">24-hour simmered grass-fed bones with healing minerals</div>
+                    </div>
+                    <div class="menu-item-price">24 hrs</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('coconut-mushroom-soup')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Coconut Mushroom Soup</div>
+                        <div class="menu-item-description">Organic mushrooms, coconut milk, ginger, and fresh herbs</div>
+                    </div>
+                    <div class="menu-item-price">30 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('turmeric-lentil-soup')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Turmeric Lentil Soup</div>
+                        <div class="menu-item-description">Red lentils, turmeric, coconut milk, and healing spices</div>
+                    </div>
+                    <div class="menu-item-price">25 min</div>
+                </div>
+            </div>
+
+            <!-- Breakfast Combos -->
+            <div class="menu-section">
+                <div class="menu-category">Breakfast Combos</div>
+                
+                <div class="menu-item" onclick="showRecipe('bulletproof-breakfast')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Bulletproof Breakfast</div>
+                        <div class="menu-item-description">Coffee, pastured eggs, avocado, and grass-fed butter</div>
+                    </div>
+                    <div class="menu-item-price">12 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('collagen-pancakes')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Collagen Pancakes</div>
+                        <div class="menu-item-description">Coconut flour, collagen, eggs, and organic berries</div>
+                    </div>
+                    <div class="menu-item-price">15 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('intermittent-fasting-bowl')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Intermittent Fasting Bowl</div>
+                        <div class="menu-item-description">MCT oil, avocado, spinach, and pastured egg yolks</div>
+                    </div>
+                    <div class="menu-item-price">8 min</div>
+                </div>
+            </div>
+
+            <!-- Lunch -->
+            <div class="menu-section">
+                <div class="menu-category">Lunch</div>
+                
+                <div class="menu-item" onclick="showRecipe('power-salad-bowl')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Power Salad Bowl</div>
+                        <div class="menu-item-description">Mixed greens, grilled chicken, avocado, and tahini dressing</div>
+                    </div>
+                    <div class="menu-item-price">15 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('cauliflower-rice-bowl')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Cauliflower Rice Bowl</div>
+                        <div class="menu-item-description">Cauliflower rice, grass-fed beef, vegetables, and coconut aminos</div>
+                    </div>
+                    <div class="menu-item-price">20 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('zucchini-noodle-bowl')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Zucchini Noodle Bowl</div>
+                        <div class="menu-item-description">Spiralized zucchini, pesto, cherry tomatoes, and pine nuts</div>
+                    </div>
+                    <div class="menu-item-price">12 min</div>
+                </div>
+            </div>
+
+            <!-- Dinner Plate -->
+            <div class="menu-section">
+                <div class="menu-category">Dinner Plate</div>
+                
+                <div class="menu-item" onclick="showRecipe('grass-fed-steak-dinner')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Grass-Fed Steak Dinner</div>
+                        <div class="menu-item-description">Ribeye steak, roasted vegetables, and herb butter</div>
+                    </div>
+                    <div class="menu-item-price">35 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('wild-salmon-dinner')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Wild Salmon Dinner</div>
+                        <div class="menu-item-description">Alaskan salmon, asparagus, and lemon ghee sauce</div>
+                    </div>
+                    <div class="menu-item-price">25 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('organic-chicken-dinner')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Organic Chicken Dinner</div>
+                        <div class="menu-item-description">Roasted chicken thighs, Brussels sprouts, and sweet potato</div>
+                    </div>
+                    <div class="menu-item-price">45 min</div>
+                </div>
+            </div>
+
+            <!-- Something Light -->
+            <div class="menu-section">
+                <div class="menu-category">Something Light</div>
+                
+                <div class="menu-item" onclick="showRecipe('cucumber-mint-water')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Cucumber Mint Water</div>
+                        <div class="menu-item-description">Refreshing cucumber, mint, and lemon infused water</div>
+                    </div>
+                    <div class="menu-item-price">2 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('vegetable-broth')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Healing Vegetable Broth</div>
+                        <div class="menu-item-description">Light vegetable broth with ginger and turmeric</div>
+                    </div>
+                    <div class="menu-item-price">15 min</div>
+                </div>
+                
+                <div class="menu-item" onclick="showRecipe('herbal-tea-blend')">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">Digestive Tea Blend</div>
+                        <div class="menu-item-description">Chamomile, ginger, and peppermint calming blend</div>
+                    </div>
+                    <div class="menu-item-price">5 min</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips Page -->
+        <div id="tips" class="page-content">
+            <div class="section-title">Optimization Tips</div>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Morning Routine</h3>
+                    <ul class="tips-list">
+                        <li>Start with 16-20 oz of filtered water</li>
+                        <li>Wait 30 minutes before coffee</li>
+                        <li>Add MCT oil gradually to avoid digestive upset</li>
+                        <li>Practice intermittent fasting for metabolic benefits</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Food Quality</h3>
+                    <ul class="tips-list">
+                        <li>Choose grass-fed and pastured animal products</li>
+                        <li>Prioritize organic vegetables and fruits</li>
+                        <li>Avoid processed and inflammatory foods</li>
+                        <li>Source high-quality fats and oils</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Timing & Preparation</h3>
+                    <ul class="tips-list">
+                        <li>Eat within a 6-8 hour window</li>
+                        <li>Meal prep on weekends for consistency</li>
+                        <li>Listen to your body's hunger signals</li>
+                        <li>Stay hydrated throughout the day</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Performance Tracking</h3>
+                    <ul class="tips-list">
+                        <li>Monitor energy levels and mental clarity</li>
+                        <li>Track sleep quality and duration</li>
+                        <li>Test biomarkers quarterly</li>
+                        <li>Adjust based on individual response</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <!-- Newsletter Signup -->
+            <div class="footer-newsletter">
+                <h4>Stay Optimized</h4>
+                <p>Get weekly bulletproof nutrition tips and exclusive recipes delivered to your inbox</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+
+            <!-- Footer Content -->
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Nutrition</h4>
+                    <ul>
+                        <li><a href="#">Bulletproof Coffee Guide</a></li>
+                        <li><a href="#">Intermittent Fasting</a></li>
+                        <li><a href="#">Keto Fundamentals</a></li>
+                        <li><a href="#">Supplement Stack</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Meal Planning</a></li>
+                        <li><a href="#">Food Quality Guide</a></li>
+                        <li><a href="#">Biohacking Tools</a></li>
+                        <li><a href="#">Scientific Research</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Consultation Booking</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Maison Vitalité. All rights reserved.</p>
+                <p>Premium nutrition guidance for optimal human performance</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function showRecipe(recipeId) {
+            alert(`Opening detailed recipe for: ${recipeId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`);
+            // In a full implementation, this would navigate to individual recipe pages
+        }
+
+        // Handle anchor navigation from external links
+        function handleAnchorNavigation() {
+            const hash = window.location.hash.substring(1); // Remove the #
+            if (hash && ['ingredients', 'recipes', 'tips'].includes(hash)) {
+                showPage(hash);
+            }
+        }
+
+        // Filter ingredients by category
+        function filterIngredients(category) {
+            const ingredients = document.querySelectorAll('#ingredients-list li:not(.category-header)');
+            const categoryHeaders = document.querySelectorAll('.category-header');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            // Update button styles
+            filterBtns.forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.color = '#4A3728';
+                btn.classList.remove('active');
+            });
+            
+            // Set active button
+            event.target.style.background = '#B8860B';
+            event.target.style.color = 'white';
+            event.target.classList.add('active');
+            
+            if (category === 'all') {
+                // Show all ingredients and category headers
+                ingredients.forEach(ingredient => {
+                    ingredient.style.display = 'list-item';
+                });
+                categoryHeaders.forEach(header => {
+                    header.style.display = 'list-item';
+                });
+            } else {
+                // Hide all category headers when filtering
+                categoryHeaders.forEach(header => {
+                    header.style.display = 'none';
+                });
+                
+                // Filter ingredients
+                ingredients.forEach(ingredient => {
+                    if (ingredient.dataset.category === category) {
+                        ingredient.style.display = 'list-item';
+                    } else {
+                        ingredient.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Check for anchor on page load
+        window.addEventListener('load', handleAnchorNavigation);
+        
+        // Check for anchor changes
+        window.addEventListener('hashchange', handleAnchorNavigation);
+
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.querySelector('.newsletter-input').value;
+            alert(`Thank you for subscribing with email: ${email}`);
+            document.querySelector('.newsletter-input').value = '';
+        });
+    </script>
+</body>
+</html>
